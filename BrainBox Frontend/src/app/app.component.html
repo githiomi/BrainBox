@@ -2,6 +2,13 @@
 <div class="text-green-500">
   <span> App title is {{ title }} </span>
 </div>
+
+@for (_event of (events$ | async); track _event.id) {
+  <div>
+    Event name: {{ _event.eventName }}
+  </div>
+}
+
 }
 @else {
 <div class="text-red-600">
