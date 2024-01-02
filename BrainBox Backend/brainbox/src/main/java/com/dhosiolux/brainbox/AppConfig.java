@@ -14,7 +14,7 @@ public class AppConfig {
     @Bean
     CommandLineRunner commandLineRunner(ApplicationContext applicationContext){
         return args -> {
-            System.out.println(ColorCodes.BLUE + "\nServer started successfully at: " + LocalDateTime.now() + "/n" + ColorCodes.RESET);
+            System.out.println(ColorCodes.BLUE + "Server started successfully at: " + LocalDateTime.now()  + ColorCodes.RESET);
         };
     }
 }
