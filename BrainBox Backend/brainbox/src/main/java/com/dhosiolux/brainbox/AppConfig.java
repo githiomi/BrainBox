@@ -25,12 +25,8 @@ public class AppConfig {
             logger.info(ColorCodes.BLUE + "Server started successfully at: " + LocalDateTime.now()  + ColorCodes.RESET);
 
             // Create at least 2 events to test
-            Event graduation = new Event("2025 Graduation", EventCategory.CAMPUS_EVENT);
-            Event awareness = new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS);
-
-            eventService.addNewEvent(graduation);
-            eventService.addNewEvent(awareness);
-
+            eventService.addNewEvent(new Event("2025 Graduation", EventCategory.CAMPUS_EVENT));
+            eventService.addNewEvent(new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS));
         };
     }
 }
