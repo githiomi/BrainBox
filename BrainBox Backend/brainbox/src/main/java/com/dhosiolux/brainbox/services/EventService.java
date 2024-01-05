@@ -41,6 +41,8 @@ public class EventService implements EventInterface {
 
     @Override
     public boolean deleteEventById(UUID eventId) {
-        return false;
+        Event eventToDelete = this.events.stream().filter(_event -> _event.getEventId().equals(eventId)).findFirst()
+                .orElseThrow(() -> new RuntimeException("No Event was found with the id: " + eventId));
+        return this.events.remove(eventToDelete);
     }
 }

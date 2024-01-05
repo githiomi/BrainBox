@@ -46,4 +46,9 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event>("The event with id: " + event.getEventId() + " has been updated successfully", this.eventService.updateEventById(event), LocalDateTime.now()));
     }
 
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<ResourceResponse<Boolean>> deleteExistingEvent(@PathVariable("id") UUID eventId){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Boolean>("The event with id: " + eventId + " has been successfully deleted", this.eventService.deleteEventById(eventId), LocalDateTime.now()));
+    }
+
 }
