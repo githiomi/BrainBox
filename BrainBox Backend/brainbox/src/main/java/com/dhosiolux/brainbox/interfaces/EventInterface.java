@@ -2,13 +2,15 @@ package com.dhosiolux.brainbox.interfaces;
 
 import com.dhosiolux.brainbox.models.Event;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface EventInterface {
 
-    Event[] getEvents();
+    List<Event> getEvents();
 
-    Event getEventById(UUID eventId);
+    Optional<Event> getEventById(UUID eventId);
 
     Event addNewEvent(String eventTitle);
 

@@ -1,13 +1,21 @@
 package com.dhosiolux.brainbox.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
-public record Event(
-        UUID eventId,
-        String eventName
-) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Event {
+
+    UUID eventId;
+    String eventName;
 
     public Event(String eventName){
-        this(UUID.randomUUID(), eventName);
+        this.eventId = UUID.randomUUID();
+        this.eventName = eventName;
     }
 }

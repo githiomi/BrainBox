@@ -3,12 +3,17 @@ package com.dhosiolux.brainbox.controllers;
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.ResourceResponse;
 import com.dhosiolux.brainbox.services.EventService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("api/v1.0/events")
@@ -22,18 +27,23 @@ public class EventController {
     }
 
     @GetMapping("")
-    private ResponseEntity<ResourceResponse<Event[]>> getAllEvents(){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event[]>("All events have been retrieved from the database", this.eventService.getEvents(), LocalDateTime.now() ));
+    private ResponseEntity<ResourceResponse<List<Event>>> getAllEvents(){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<List<Event>>("All events have been retrieved from the database", this.eventService.getEvents(), LocalDateTime.now() ));
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<ResourceResponse<Optional<Event>>> getEventById(@PathVariable("id") UUID eventId){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Optional<Event>>("We have retrieved one event by its ID", this.eventService.getEventById(eventId), LocalDateTime.now()));
     }
 
     @PostMapping("/create")
-    private ResponseEntity<ResourceResponse<Event>> createNewEvent(@RequestBody String eventTitle) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResourceResponse<Event>("The event has been created successfully.", this.eventService.addNewEvent(eventTitle), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<Event>> createNewEvent(@RequestBody Event newEvent) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResourceResponse<Event>("The event has been created successfully.", this.eventService.addNewEvent(newEvent.getEventName().trim()), LocalDateTime.now()));
     }
 
     @PutMapping("/update")
     private ResponseEntity<ResourceResponse<Event>> updateExistingEvent(@RequestBody Event event){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event>("The event with id: " + event.eventId() + " has been updated successfully", this.eventService.updateEventById(event), LocalDateTime.now()));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event>("The event with id: " + event.getEventId() + " has been updated successfully", this.eventService.updateEventById(event), LocalDateTime.now()));
     }
 
 }
