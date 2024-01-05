@@ -26,9 +26,8 @@ public class EventService implements EventInterface {
     }
 
     @Override
-    public Event addNewEvent(String eventTitle) {
-        EventCategory eventCategory = EventCategory.CAMPUS_EVENT;
-        Event newEvent = new Event(eventTitle, eventCategory);
+    public Event addNewEvent(Event newEvent) {
+        newEvent.setEventId(UUID.randomUUID());
         this.events.add(newEvent);
         return newEvent;
     }

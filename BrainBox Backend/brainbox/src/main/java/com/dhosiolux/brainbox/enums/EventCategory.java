@@ -13,7 +13,7 @@ public enum EventCategory {
     FASHION_AND_DESIGN("Fashion and Design"),
     BUSINESS_AND_FINANCE("Business and Finance"),
     BOOKS_AND_LITERATURE("Books and Literature"),
-    PEOPLE_AND_NETWORKING("Networking"),
+    PEOPLE_AND_NETWORKING("People and Networking"),
     SCIENCE_AND_TECHNOLOGY("Science and Technology"),
     CAMPUS_EVENT("Campus Event"),
     HEALTH_AND_WELLNESS("Health and Wellness"),

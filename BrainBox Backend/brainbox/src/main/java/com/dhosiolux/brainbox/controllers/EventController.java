@@ -36,7 +36,7 @@ public class EventController {
 
     @PostMapping("/create")
     private ResponseEntity<ResourceResponse<Event>> createNewEvent(@RequestBody Event newEvent) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResourceResponse<Event>("The event has been created successfully.", this.eventService.addNewEvent(newEvent.getEventName().trim()), LocalDateTime.now()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResourceResponse<Event>("The event has been created successfully.", this.eventService.addNewEvent(newEvent), LocalDateTime.now()));
     }
 
     @PutMapping("/update")

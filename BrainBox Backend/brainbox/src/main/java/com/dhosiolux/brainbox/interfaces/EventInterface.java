@@ -12,7 +12,7 @@ public interface EventInterface {
 
     Optional<Event> getEventById(UUID eventId);
 
-    Event addNewEvent(String eventTitle);
+    Event addNewEvent(Event event);
 
     Event updateEventById(Event event);
 
