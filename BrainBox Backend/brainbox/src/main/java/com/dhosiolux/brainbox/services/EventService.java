@@ -1,5 +1,6 @@
 package com.dhosiolux.brainbox.services;
 
+import com.dhosiolux.brainbox.enums.EventCategory;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,8 @@ public class EventService implements EventInterface {
 
     @Override
     public Event addNewEvent(String eventTitle) {
-        Event newEvent = new Event(eventTitle);
+        EventCategory eventCategory = EventCategory.CAMPUS_EVENT;
+        Event newEvent = new Event(eventTitle, eventCategory);
         this.events.add(newEvent);
         return newEvent;
     }

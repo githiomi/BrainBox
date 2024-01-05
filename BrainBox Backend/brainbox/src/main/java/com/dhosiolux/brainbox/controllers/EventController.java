@@ -3,8 +3,6 @@ package com.dhosiolux.brainbox.controllers;
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.ResourceResponse;
 import com.dhosiolux.brainbox.services.EventService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
