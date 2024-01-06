@@ -29,7 +29,7 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<List<Event>>("All events have been retrieved from the database", this.eventService.getEvents(), LocalDateTime.now() ));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping( "/{id}")
     private ResponseEntity<ResourceResponse<Optional<Event>>> getEventById(@PathVariable("id") UUID eventId){
         return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Optional<Event>>("We have retrieved one event by its ID", this.eventService.getEventById(eventId), LocalDateTime.now()));
     }
