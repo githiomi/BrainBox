@@ -1,23 +1,24 @@
 package com.dhosiolux.brainbox.exceptions;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplicationException {
+public class ExceptionPayload {
 
     String errorMessage;
-    Throwable throwableError;
-    HttpStatus httpStatus;
+    public HttpStatus httpStatus;
     LocalDateTime timestamp;
 
-    public ApplicationException (String errorMessage, Throwable throwableError, HttpStatus httpStatus){
+    public ExceptionPayload(String errorMessage, HttpStatus httpStatus){
         this.errorMessage = errorMessage;
-        this.throwableError = throwableError;
         this.timestamp = LocalDateTime.now();
     }
 }

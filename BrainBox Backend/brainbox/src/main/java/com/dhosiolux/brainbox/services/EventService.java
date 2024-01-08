@@ -1,9 +1,6 @@
 package com.dhosiolux.brainbox.services;
 
-import com.dhosiolux.brainbox.enums.EventCategory;
-import com.dhosiolux.brainbox.exceptions.ApplicationException;
-import com.dhosiolux.brainbox.exceptions.ApplicationExceptionHandler;
-import com.dhosiolux.brainbox.exceptions.RequestException;
+import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
 import org.springframework.stereotype.Service;
@@ -37,10 +34,8 @@ public class EventService implements EventInterface {
 
     @Override
     public Event updateEventById(Event event) {
-//        Event eventToUpdate = this.events.stream().filter(_event -> _event.getEventId().equals(event.getEventId())).findFirst()
-//                .orElseThrow(() -> new RuntimeException("No Event was found with the id: " + event.getEventId()));
         Event eventToUpdate = this.events.stream().filter(_event -> _event.getEventId().equals(event.getEventId())).findFirst()
-                .orElseThrow(() -> new RequestException("The event with id: " + event.getEventId() + " could not be found in the database."));
+                .orElseThrow(() -> new ResourceNotFoundException("The event with id: " + event.getEventId() + " could not be found in the database."));
         eventToUpdate.setEventName(event.getEventName());
         return eventToUpdate;
     }
