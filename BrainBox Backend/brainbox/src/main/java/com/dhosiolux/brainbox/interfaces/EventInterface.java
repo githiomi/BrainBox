@@ -10,7 +10,7 @@ public interface EventInterface {
 
     List<Event> getEvents();
 
-    Optional<Event> getEventById(UUID eventId);
+    Event getEventById(UUID eventId);
 
     Event addNewEvent(Event event);
 

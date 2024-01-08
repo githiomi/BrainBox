@@ -30,8 +30,8 @@ public class EventController {
     }
 
     @GetMapping( "/{id}")
-    private ResponseEntity<ResourceResponse<Optional<Event>>> getEventById(@PathVariable("id") UUID eventId){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Optional<Event>>("We have retrieved one event by its ID", this.eventService.getEventById(eventId), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<Event>> getEventById(@PathVariable("id") UUID eventId){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event>("We have retrieved one event by its ID", this.eventService.getEventById(eventId), LocalDateTime.now()));
     }
 
     @PostMapping("/create")

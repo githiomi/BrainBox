@@ -18,11 +18,10 @@ public class ApplicationExceptionHandler {
         // Exception payload
         ExceptionPayload exception = new ExceptionPayload(
                 ex.getMessage(),
-                HttpStatus.BAD_REQUEST,
-                LocalDateTime.now()
+                ex.getHttpStatus()
         );
 
-        return ResponseEntity.status(exception.httpStatus).body(exception);
+        return ResponseEntity.status(exception.getHttpStatus()).body(exception);
     }
 
 }

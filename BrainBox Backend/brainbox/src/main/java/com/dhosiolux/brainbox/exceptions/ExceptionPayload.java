@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
 public class ExceptionPayload {
 
     String errorMessage;
-    public HttpStatus httpStatus;
+    HttpStatus httpStatus;
     LocalDateTime timestamp;
 
     public ExceptionPayload(String errorMessage, HttpStatus httpStatus){
         this.errorMessage = errorMessage;
+        this.httpStatus = httpStatus;
         this.timestamp = LocalDateTime.now();
     }
 }
