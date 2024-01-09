@@ -19,7 +19,7 @@ public enum EventCategory {
     HEALTH_AND_WELLNESS("Health and Wellness"),
     PERSONAL_DEVELOPMENT("Personal Development");
 
-    private String categoryName;
+    private final String categoryName;
     EventCategory(String categoryName) {
         this.categoryName = categoryName;
     }
