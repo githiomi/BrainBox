@@ -1,7 +1,7 @@
 package com.dhosiolux.brainbox.models;
 
+import com.dhosiolux.brainbox.enums.Role;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Random;
 import java.util.UUID;
