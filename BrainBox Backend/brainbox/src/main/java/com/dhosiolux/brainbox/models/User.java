@@ -17,7 +17,7 @@ public class User {
     public User(String firstName, String lastName, Role role){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = (firstName.charAt(0) + lastName.substring(0,3)).toUpperCase() + generateNumberSuffix();
+        this.username = (firstName.charAt(0) + lastName.substring(0,4)).toUpperCase() + generateNumberSuffix();
     }
 
     private String generateNumberSuffix(){
