@@ -5,15 +5,18 @@ import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.exceptions.UserAlreadyExistsException;
 import com.dhosiolux.brainbox.interfaces.UserInterface;
 import com.dhosiolux.brainbox.models.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.dhosiolux.brainbox.enums.Role.ADMIN;
 import static com.dhosiolux.brainbox.enums.Role.ALUMNI;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class UserService implements UserInterface {
@@ -39,6 +42,11 @@ public class UserService implements UserInterface {
     @Override
     public Set<User> getAllAlumni() {
         return this.users.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toSet());
+    }
+
+    @Override
+    public User getUserById(UUID userId){
+        return this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with id " + userId + " was found in the database.", NOT_FOUND));
     }
 
     @Override

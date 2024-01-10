@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -35,6 +36,11 @@ public class UserController {
     @GetMapping("/alumni")
     private ResponseEntity<ResourceResponse<Set<User>>> getAlumniUsers() {
         return ResponseEntity.status(200).body(new ResourceResponse<Set<User>>(this.userService.getAllAlumni().size() + " alumni users were found.", this.userService.getAllAlumni(), LocalDateTime.now()));
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<ResourceResponse<User>> getUserById(@PathVariable("id") UUID userId){
+        return ResponseEntity.status(200).body(new ResourceResponse<User>("User with ID: " + userId + " was found on the database", this.userService.getUserById(userId), LocalDateTime.now()));
     }
 
     @PostMapping("")

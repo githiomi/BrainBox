@@ -3,6 +3,7 @@ package com.dhosiolux.brainbox.interfaces;
 import com.dhosiolux.brainbox.models.User;
 
 import java.util.Set;
+import java.util.UUID;
 
 public interface UserInterface {
 
@@ -12,6 +13,10 @@ public interface UserInterface {
 
     Set<User> getAllAlumni();
 
+    User getUserById(UUID userId);
+
     User createNewUser(User user);
+
+
 
 }
