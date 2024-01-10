@@ -8,16 +8,17 @@ import java.util.UUID;
 
 @Data
 public class User {
-    final UUID userId = UUID.randomUUID();
-    String firstName;
-    String lastName;
-    String username;
-    Role userRole;
+    private final UUID userId = UUID.randomUUID();
+    private String firstName;
+    private String lastName;
+    private String username;
+    private Role userRole;
 
     public User(String firstName, String lastName, Role role){
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = (firstName.charAt(0) + lastName.substring(0,4)).toUpperCase() + generateNumberSuffix();
+        this.userRole = role;
     }
 
     private String generateNumberSuffix(){

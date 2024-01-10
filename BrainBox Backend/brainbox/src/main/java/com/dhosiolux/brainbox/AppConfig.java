@@ -34,15 +34,6 @@ public class AppConfig {
             eventService.addNewEvent(new Event("2025 Graduation", EventCategory.CAMPUS_EVENT));
             eventService.addNewEvent(new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS));
 
-            List<User> usersList = new ArrayList<>(
-                    Arrays.asList(
-                            new User("Daniel", "Githiomi", ADMIN),
-                            new User("MacDonald", "Nyahoja", ALUMNI),
-                            new User("Nabila", "Modan", ALUMNI)
-                    )
-            );
-
-            usersList.forEach(System.out::println);
         };
     }
 }

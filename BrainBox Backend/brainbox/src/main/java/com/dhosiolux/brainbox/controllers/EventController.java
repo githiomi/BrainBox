@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("api/v1.0/events")
 @CrossOrigin(origins = "http://localhost:4200")
 public class EventController {
