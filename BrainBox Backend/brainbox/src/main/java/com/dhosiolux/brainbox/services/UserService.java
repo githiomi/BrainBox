@@ -42,8 +42,17 @@ public class UserService implements UserInterface {
 
     @Override
     public User createNewUser(User user) {
-        User newUser = new User(user.getFirstName(), user.getLastName(), user.getUserRole());
+
+        // Check if user with email already exists
+        if(checkIfUserAlreadyExists(user))
+            throw new UserAlreadyExistsException(user);
+
+        User newUser = new User(user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getUserRole());
         this.users.add(newUser);
         return newUser;
+    }
+
+    private boolean checkIfUserAlreadyExists(User user){
+        return this.users.stream().anyMatch(_user -> _user.getEmailAddress().equals(user.getEmailAddress()));
     }
 }

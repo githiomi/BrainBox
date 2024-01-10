@@ -12,11 +12,13 @@ public class User {
     private String firstName;
     private String lastName;
     private String username;
+    private String emailAddress;
     private Role userRole;
 
-    public User(String firstName, String lastName, Role role){
+    public User(String firstName, String lastName, String emailAddress, Role role){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.emailAddress = emailAddress;
         this.userRole = role;
         this.username = generateUsername(firstName, lastName);
     }
