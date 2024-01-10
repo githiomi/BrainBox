@@ -2,6 +2,7 @@ package com.dhosiolux.brainbox.services;
 
 import com.dhosiolux.brainbox.enums.Role;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
+import com.dhosiolux.brainbox.exceptions.UserAlreadyExistsException;
 import com.dhosiolux.brainbox.interfaces.UserInterface;
 import com.dhosiolux.brainbox.models.User;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ public class UserService implements UserInterface {
 
     private Set<User> users = new HashSet<>(
             Arrays.asList(
-                    new User("Daniel", "Githiomi", ADMIN),
-                    new User("MacDonald", "Nyahoja", ALUMNI),
-                    new User("Nabila", "Modan", ALUMNI)
+                    new User("Daniel", "Githiomi", "d.githiomi@alustudent.com", ADMIN),
+                    new User("MacDonald", "Nyahoja", "m.nyahoja@alustudent.com", ALUMNI),
+                    new User("Nabila", "Modan", "n.modan@alustudent.com", ALUMNI)
             )
     );
 
@@ -45,7 +46,7 @@ public class UserService implements UserInterface {
 
         // Check if user with email already exists
         if(checkIfUserAlreadyExists(user))
-            throw new UserAlreadyExistsException(user);
+            throw new UserAlreadyExistsException("A user with the email " + user.getEmailAddress() + " already exists on the database.");
 
         User newUser = new User(user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getUserRole());
         this.users.add(newUser);
