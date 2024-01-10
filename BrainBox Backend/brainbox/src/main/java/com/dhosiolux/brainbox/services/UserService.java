@@ -37,6 +37,6 @@ public class UserService implements UserInterface {
 
     @Override
     public Set<User> getAllAlumni() {
-        return null;
+        return this.users.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toSet());
     }
 }
