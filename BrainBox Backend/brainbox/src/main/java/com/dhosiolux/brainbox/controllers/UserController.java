@@ -5,12 +5,12 @@ import com.dhosiolux.brainbox.models.User;
 import com.dhosiolux.brainbox.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("api/v1.0/users")
@@ -35,5 +35,10 @@ public class UserController {
     @GetMapping("/alumni")
     private ResponseEntity<ResourceResponse<Set<User>>> getAlumniUsers() {
         return ResponseEntity.status(200).body(new ResourceResponse<Set<User>>(this.userService.getAllAlumni().size() + " alumni users were found.", this.userService.getAllAlumni(), LocalDateTime.now()));
+    }
+
+    @PostMapping("")
+    private ResponseEntity<ResourceResponse<User>> createNewUser(@RequestBody User user) {
+        return ResponseEntity.status(CREATED).body(new ResourceResponse<User>("A new user has been created.", this.userService.createNewUser(user), LocalDateTime.now()));
     }
 }

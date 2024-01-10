@@ -17,8 +17,19 @@ public class User {
     public User(String firstName, String lastName, Role role){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = (firstName.charAt(0) + lastName.substring(0,4)).toUpperCase() + generateNumberSuffix();
         this.userRole = role;
+        this.username = generateUsername(firstName, lastName);
+    }
+
+    private String generateUsername(String firstName, String lastName){
+        String lastNameSubString;
+
+        if(lastName.length() < 4)
+            lastNameSubString = lastName.substring(0, lastName.length());
+        else
+            lastNameSubString = lastName.substring(0,4);
+
+        return (firstName.charAt(0) + lastNameSubString + generateNumberSuffix()).toUpperCase();
     }
 
     private String generateNumberSuffix(){

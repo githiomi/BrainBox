@@ -39,4 +39,11 @@ public class UserService implements UserInterface {
     public Set<User> getAllAlumni() {
         return this.users.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toSet());
     }
+
+    @Override
+    public User createNewUser(User user) {
+        User newUser = new User(user.getFirstName(), user.getLastName(), user.getUserRole());
+        this.users.add(newUser);
+        return newUser;
+    }
 }

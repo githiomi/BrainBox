@@ -12,4 +12,6 @@ public interface UserInterface {
 
     Set<User> getAllAlumni();
 
+    User createNewUser(User user);
+
 }
