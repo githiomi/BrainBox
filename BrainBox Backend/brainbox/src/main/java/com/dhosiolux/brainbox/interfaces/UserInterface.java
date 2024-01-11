@@ -17,6 +17,6 @@ public interface UserInterface {
 
     User createNewUser(User user);
 
-
+    boolean updateExistingUser(User user);
 
 }

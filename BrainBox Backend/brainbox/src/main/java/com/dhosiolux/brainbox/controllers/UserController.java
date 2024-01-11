@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("api/v1.0/users")
@@ -46,5 +47,10 @@ public class UserController {
     @PostMapping("")
     private ResponseEntity<ResourceResponse<User>> createNewUser(@RequestBody User user) {
         return ResponseEntity.status(CREATED).body(new ResourceResponse<User>("A new user has been created.", this.userService.createNewUser(user), LocalDateTime.now()));
+    }
+
+    @PutMapping("/update")
+    private ResponseEntity<ResourceResponse<Boolean>> updateExistingUser(@RequestBody User user){
+        return ResponseEntity.status(OK).body(new ResourceResponse<Boolean>("The user with id: " + user.getUserId() + " has been updated successfully", this.userService.updateExistingUser(user), LocalDateTime.now()));
     }
 }
