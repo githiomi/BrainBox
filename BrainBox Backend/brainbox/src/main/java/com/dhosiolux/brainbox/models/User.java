@@ -40,4 +40,11 @@ public class User {
         return String.valueOf(randomInt);
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return userId == ((User) o).getUserId();
+    }
+
 }
