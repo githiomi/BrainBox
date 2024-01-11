@@ -1,22 +1,28 @@
 package com.dhosiolux.brainbox.services;
 
+import com.dhosiolux.brainbox.enums.EventCategory;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class EventService implements EventInterface {
 
-    private final List<Event> events = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
+
+    public void addTestEvents() {
+        this.events.addAll(Arrays.asList(
+                        new Event("2025 Graduation", EventCategory.CAMPUS_EVENT),
+                        new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS)
+                )
+        );
+    }
 
     @Override
     public List<Event> getEvents() {

@@ -18,13 +18,17 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class UserService implements UserInterface {
 
-    private Set<User> users = new HashSet<>(
-            Arrays.asList(
-                    new User("Daniel", "Githiomi", "d.githiomi@alustudent.com", ADMIN),
-                    new User("MacDonald", "Nyahoja", "m.nyahoja@alustudent.com", ALUMNI),
-                    new User("Nabila", "Modan", "n.modan@alustudent.com", ALUMNI)
-            )
-    );
+    private Set<User> users;
+
+    public void addTestUsers(){
+        this.users = new HashSet<>(
+                Arrays.asList(
+                        new User("Daniel", "Githiomi", "d.githiomi@alustudent.com", ADMIN),
+                        new User("MacDonald", "Nyahoja", "m.nyahoja@alustudent.com", ALUMNI),
+                        new User("Nabila", "Modan", "n.modan@alustudent.com", ALUMNI)
+                )
+        );
+    }
 
     @Override
     public Set<User> getAllUsers() {

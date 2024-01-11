@@ -6,6 +6,7 @@ import com.dhosiolux.brainbox.models.ColorCodes;
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.User;
 import com.dhosiolux.brainbox.services.EventService;
+import com.dhosiolux.brainbox.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -26,13 +27,13 @@ public class AppConfig {
     private final Logger logger = LoggerFactory.getLogger(EventController.class);
 
     @Bean
-    CommandLineRunner commandLineRunner(EventService eventService){
+    CommandLineRunner commandLineRunner(EventService eventService, UserService userService){
         return args -> {
             logger.info(ColorCodes.BLUE + "Server started successfully at: " + LocalDateTime.now()  + ColorCodes.RESET);
 
-            // Create at least 2 events to test
-            eventService.addNewEvent(new Event("2025 Graduation", EventCategory.CAMPUS_EVENT));
-            eventService.addNewEvent(new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS));
+            // Create dummy data
+            userService.addTestUsers();
+            eventService.addTestEvents();
 
         };
     }
