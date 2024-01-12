@@ -13,10 +13,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class EventService implements EventInterface {
 
-    private List<Event> events = new ArrayList<>();
+    private List<Event> events;
 
     public void addTestEvents() {
-        this.events.addAll(Arrays.asList(
+        this.events = new ArrayList<>(
+                Arrays.asList(
                         new Event("2025 Graduation", EventCategory.CAMPUS_EVENT),
                         new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS)
                 )
@@ -36,6 +37,7 @@ public class EventService implements EventInterface {
     @Override
     public Event addNewEvent(Event newEvent) {
         newEvent.setEventId(UUID.randomUUID());
+        newEvent.setEventCategory(Enum.valueOf(EventCategory.class, newEvent.getEventCategory().toString()));
         this.events.add(newEvent);
         return newEvent;
     }
