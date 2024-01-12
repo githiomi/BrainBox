@@ -53,4 +53,9 @@ public class UserController {
     private ResponseEntity<ResourceResponse<Boolean>> updateExistingUser(@RequestBody User user){
         return ResponseEntity.status(OK).body(new ResourceResponse<Boolean>("The user with id: " + user.getUserId() + " has been updated successfully", this.userService.updateExistingUser(user), LocalDateTime.now()));
     }
+
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<ResourceResponse<Boolean>> deleteExistingUser(@PathVariable("id") UUID userId){
+        return ResponseEntity.status(OK).body(new ResourceResponse<Boolean>("The user with id: " + userId + " has been deleted successfully", this.userService.deleteExistingUser(userId), LocalDateTime.now()));
+    }
 }

@@ -4,7 +4,6 @@ import com.dhosiolux.brainbox.enums.EventCategory;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

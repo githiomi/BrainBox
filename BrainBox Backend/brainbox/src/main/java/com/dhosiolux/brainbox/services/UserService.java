@@ -79,4 +79,11 @@ public class UserService implements UserInterface {
 
         return true;
     }
+
+    @Override
+    public boolean deleteExistingUser(UUID userId) {
+        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with id " + userId + " was found in the database.", NOT_FOUND));
+        this.users.remove(userToUpdate);
+        return true;
+    }
 }
