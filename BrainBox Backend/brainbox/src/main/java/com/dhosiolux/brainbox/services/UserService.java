@@ -78,7 +78,10 @@ public class UserService implements UserInterface {
             return false;
 
         User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(user.getUserId())).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + user.getUserId() + " was found in the database.", NOT_FOUND));
+
+        // Remove user from the list
         this.users.remove(userToUpdate);
+
         this.users.add(user);
 
         return true;

@@ -68,19 +68,12 @@ public class EventService implements EventInterface {
         Event eventToUpdate = this.events.stream().filter(_event -> _event.getEventId().equals(event.getEventId())).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("No event with the id: " + event.getEventId() + " was found on the database.", NOT_FOUND));
 
-        // Get event index
-        int index = this.events.indexOf(eventToUpdate);
-
         // Remove event from list
         this.events.remove(eventToUpdate);
 
-        // Update event fields
-        eventToUpdate.setEventName(event.getEventName());
-        eventToUpdate.setCreatedBy(event.getCreatedBy());
-
         // Add event back to list
-        this.events.add(index, eventToUpdate);
-        return eventToUpdate;
+        this.events.add(this.events.indexOf(eventToUpdate), event);
+        return event;
     }
 
     @Override
