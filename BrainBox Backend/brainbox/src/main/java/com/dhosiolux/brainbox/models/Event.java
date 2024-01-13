@@ -15,10 +15,12 @@ public class Event {
     UUID eventId;
     String eventName;
     EventCategory eventCategory;
+    String createdBy;
 
-    public Event(String eventName, EventCategory eventCategory){
+    public Event(String eventName, EventCategory eventCategory, String createdBy){
         this.eventId = UUID.randomUUID();
         this.eventName = eventName;
         this.eventCategory = eventCategory;
+        this.createdBy = createdBy;
     }
 }

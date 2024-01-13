@@ -18,8 +18,8 @@ public class EventService implements EventInterface {
     public void addTestEvents() {
         this.events = new ArrayList<>(
                 Arrays.asList(
-                        new Event("2025 Graduation", EventCategory.CAMPUS_EVENT),
-                        new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS)
+                        new Event("2025 Graduation", EventCategory.CAMPUS_EVENT, ""),
+                        new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS, "")
                 )
         );
     }

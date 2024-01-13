@@ -4,6 +4,7 @@ import com.dhosiolux.brainbox.models.Event;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 public interface EventInterface {
@@ -17,6 +18,5 @@ public interface EventInterface {
     Event updateEventById(Event event);
 
     boolean deleteEventById(UUID eventId);
-
 
 }
