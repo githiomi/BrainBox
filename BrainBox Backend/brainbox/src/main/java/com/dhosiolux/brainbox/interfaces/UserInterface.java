@@ -15,6 +15,8 @@ public interface UserInterface {
 
     User getUserById(UUID userId);
 
+    User getUserByUsername(String username);
+
     User createNewUser(User user);
 
     boolean updateExistingUser(User user);

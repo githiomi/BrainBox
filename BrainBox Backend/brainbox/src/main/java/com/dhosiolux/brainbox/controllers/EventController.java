@@ -2,6 +2,7 @@ package com.dhosiolux.brainbox.controllers;
 
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.ResourceResponse;
+import com.dhosiolux.brainbox.models.User;
 import com.dhosiolux.brainbox.services.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("api/v1.0/events")
@@ -26,12 +29,17 @@ public class EventController {
 
     @GetMapping("")
     private ResponseEntity<ResourceResponse<List<Event>>> getAllEvents(){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<List<Event>>("All events have been retrieved from the database", this.eventService.getEvents(), LocalDateTime.now() ));
+        return ResponseEntity.status(OK).body(new ResourceResponse<List<Event>>("All events have been retrieved from the database", this.eventService.getEvents(), LocalDateTime.now() ));
     }
 
     @GetMapping( "/{id}")
     private ResponseEntity<ResourceResponse<Event>> getEventById(@PathVariable("id") UUID eventId){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event>("We have retrieved one event by its ID", this.eventService.getEventById(eventId), LocalDateTime.now()));
+        return ResponseEntity.status(OK).body(new ResourceResponse<Event>("We have retrieved one event by its ID", this.eventService.getEventById(eventId), LocalDateTime.now()));
+    }
+
+    @GetMapping("/user")
+    private ResponseEntity<ResourceResponse<List<Event>>> getEventsByUsername(@RequestParam(value = "username") String username){
+        return ResponseEntity.status(OK).body(new ResourceResponse<List<Event>>(username + " has created the following events", this.eventService.getEventsByUsername(username), LocalDateTime.now()));
     }
 
     @PostMapping("/create")
@@ -41,12 +49,12 @@ public class EventController {
 
     @PutMapping("/update")
     private ResponseEntity<ResourceResponse<Event>> updateExistingEvent(@RequestBody Event event){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Event>("The event with id: " + event.getEventId() + " has been updated successfully", this.eventService.updateEventById(event), LocalDateTime.now()));
+        return ResponseEntity.status(OK).body(new ResourceResponse<Event>("The event with id: " + event.getEventId() + " has been updated successfully", this.eventService.updateEventById(event), LocalDateTime.now()));
     }
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity<ResourceResponse<Boolean>> deleteExistingEvent(@PathVariable("id") UUID eventId){
-        return ResponseEntity.status(HttpStatus.OK).body(new ResourceResponse<Boolean>("The event with id: " + eventId + " has been successfully deleted", this.eventService.deleteEventById(eventId), LocalDateTime.now()));
+        return ResponseEntity.status(OK).body(new ResourceResponse<Boolean>("The event with id: " + eventId + " has been successfully deleted", this.eventService.deleteEventById(eventId), LocalDateTime.now()));
     }
 
 }

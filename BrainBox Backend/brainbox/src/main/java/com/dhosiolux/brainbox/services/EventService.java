@@ -4,16 +4,25 @@ import com.dhosiolux.brainbox.enums.EventCategory;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
+import com.dhosiolux.brainbox.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class EventService implements EventInterface {
 
+    // Service Dependency Injection
+    private final UserService userService;
+
     private List<Event> events;
+
+    public EventService(UserService userService) {
+        this.userService = userService;
+    }
 
     public void addTestEvents() {
         this.events = new ArrayList<>(
@@ -40,6 +49,14 @@ public class EventService implements EventInterface {
         newEvent.setEventCategory(Enum.valueOf(EventCategory.class, newEvent.getEventCategory().toString()));
         this.events.add(newEvent);
         return newEvent;
+    }
+
+    @Override
+    public List<Event> getEventsByUsername(String username) {
+        // Safe first - ensure user exists
+        User user = this.userService.getUserByUsername(username);
+
+        return this.events.stream().filter(_event -> _event.getCreatedBy().equals(username)).collect(Collectors.toList());
     }
 
     @Override

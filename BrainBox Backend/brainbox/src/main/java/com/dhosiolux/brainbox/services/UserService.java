@@ -46,9 +46,13 @@ public class UserService implements UserInterface {
     }
 
     @Override
-
     public User getUserById(UUID userId){
-        return this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with id " + userId + " was found in the database.", NOT_FOUND));
+        return this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with ID: " + userId + " was found in the database.", NOT_FOUND));
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return this.users.stream().filter(_user -> _user.getUsername().equals(username)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the username: " + username + " was found in the database.", NOT_FOUND));
     }
 
     @Override
@@ -73,7 +77,7 @@ public class UserService implements UserInterface {
         if (this.getUserById(user.getUserId()) == null)
             return false;
 
-        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(user.getUserId())).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with id " + user.getUserId() + " was found in the database.", NOT_FOUND));
+        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(user.getUserId())).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + user.getUserId() + " was found in the database.", NOT_FOUND));
         this.users.remove(userToUpdate);
         this.users.add(user);
 
@@ -82,7 +86,7 @@ public class UserService implements UserInterface {
 
     @Override
     public boolean deleteExistingUser(UUID userId) {
-        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with id " + userId + " was found in the database.", NOT_FOUND));
+        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + userId + " was found in the database.", NOT_FOUND));
         this.users.remove(userToUpdate);
         return true;
     }

@@ -13,6 +13,8 @@ public interface EventInterface {
 
     Event getEventById(UUID eventId);
 
+    List<Event> getEventsByUsername(String username);
+
     Event addNewEvent(Event event);
 
     Event updateEventById(Event event);
