@@ -1,5 +1,6 @@
 package com.dhosiolux.brainbox.services;
 
+import com.dhosiolux.brainbox.enums.Address;
 import com.dhosiolux.brainbox.enums.Gender;
 import com.dhosiolux.brainbox.enums.Role;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
@@ -26,9 +27,9 @@ public class UserService implements UserInterface {
     public void addTestUsers(){
         this.users = new ArrayList<>(
                 Arrays.asList(
-                        new User("Daniel", "Githiomi", new Random().nextInt((70-22) + 22), MALE, "d.githiomi@alustudent.com", ADMIN),
-                        new User("MacDonald", "Nyahoja", new Random().nextInt((70-22) + 22), MALE, "m.nyahoja@alustudent.com", ALUMNI),
-                        new User("Nabila", "Modan", new Random().nextInt((70-22) + 22), MALE, "n.modan@alustudent.com", ALUMNI)
+                        new User("Daniel", "Githiomi", new Random().nextInt((70-22) + 22), MALE, "d.githiomi@alustudent.com", ADMIN, new Address("Grand Baie", 30511L, "Mauritius")),
+                        new User("MacDonald", "Nyahoja", new Random().nextInt((70-22) + 22), MALE, "m.nyahoja@alustudent.com", ALUMNI, new Address("Quatre Bornes", 893264L, "Mauritius")),
+                        new User("Nabila", "Modan", new Random().nextInt((70-22) + 22), MALE, "n.modan@alustudent.com", ALUMNI, new Address("Maputo", 124567L, "Mozambique"))
                 )
         );
     }
@@ -65,7 +66,7 @@ public class UserService implements UserInterface {
         if(checkIfUserAlreadyExists(user))
             throw new UserAlreadyExistsException("A user with the email " + user.getEmailAddress() + " already exists on the database.");
 
-        User newUser = new User(user.getFirstName(), user.getLastName(), user.getAge(), Enum.valueOf(Gender.class, user.getGender().toString()), user.getEmailAddress(), Enum.valueOf(Role.class, user.getUserRole().toString()));
+        User newUser = new User(user.getFirstName(), user.getLastName(), user.getAge(), Enum.valueOf(Gender.class, user.getGender().toString()), user.getEmailAddress(), Enum.valueOf(Role.class, user.getUserRole().toString()), user.getAddress());
         this.users.add(newUser);
 
         return newUser;

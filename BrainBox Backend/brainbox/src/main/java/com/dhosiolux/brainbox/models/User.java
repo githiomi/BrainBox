@@ -1,5 +1,6 @@
 package com.dhosiolux.brainbox.models;
 
+import com.dhosiolux.brainbox.enums.Address;
 import com.dhosiolux.brainbox.enums.Gender;
 import com.dhosiolux.brainbox.enums.Role;
 import lombok.Data;
@@ -17,14 +18,16 @@ public class User {
     private Gender gender;
     private String emailAddress;
     private Role userRole;
+    private Address address;
 
-    public User(String firstName, String lastName, int age, Gender gender, String emailAddress, Role role){
+    public User(String firstName, String lastName, int age, Gender gender, String emailAddress, Role role, Address address){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
         this.emailAddress = emailAddress;
         this.userRole = role;
+        this.address = address;
         this.username = generateUsername(firstName, lastName);
     }
 
