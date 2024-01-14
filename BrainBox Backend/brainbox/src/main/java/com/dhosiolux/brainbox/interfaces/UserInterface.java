@@ -2,16 +2,17 @@ package com.dhosiolux.brainbox.interfaces;
 
 import com.dhosiolux.brainbox.models.User;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public interface UserInterface {
 
-    Set<User> getAllUsers();
+    List<User> getAllUsers();
 
-    Set<User> getAllAdmins();
+    List<User> getAllAdmins();
 
-    Set<User> getAllAlumni();
+    List<User> getAllAlumni();
 
     User getUserById(UUID userId);
 

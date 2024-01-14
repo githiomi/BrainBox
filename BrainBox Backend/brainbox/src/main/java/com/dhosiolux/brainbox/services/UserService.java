@@ -21,10 +21,10 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class UserService implements UserInterface {
 
-    private Set<User> users;
+    private List<User> users;
 
     public void addTestUsers(){
-        this.users = new HashSet<>(
+        this.users = new ArrayList<>(
                 Arrays.asList(
                         new User("Daniel", "Githiomi", MALE, "d.githiomi@alustudent.com", ADMIN),
                         new User("MacDonald", "Nyahoja", MALE, "m.nyahoja@alustudent.com", ALUMNI),
@@ -34,18 +34,18 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public Set<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return this.users;
     }
 
     @Override
-    public Set<User> getAllAdmins() {
-        return this.users.stream().filter(_user -> _user.getUserRole().equals(ADMIN)).collect(Collectors.toSet());
+    public List<User> getAllAdmins() {
+        return this.users.stream().filter(_user -> _user.getUserRole().equals(ADMIN)).collect(Collectors.toList());
     }
 
     @Override
-    public Set<User> getAllAlumni() {
-        return this.users.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toSet());
+    public List<User> getAllAlumni() {
+        return this.users.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toList());
     }
 
     @Override
@@ -82,10 +82,13 @@ public class UserService implements UserInterface {
 
         User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(user.getUserId())).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + user.getUserId() + " was found in the database.", NOT_FOUND));
 
+        // Get current user index
+        int index = this.users.indexOf(userToUpdate);
+
         // Remove user from the list
         this.users.remove(userToUpdate);
 
-        this.users.add(user);
+        this.users.add(index, user);
 
         return true;
     }
