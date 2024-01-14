@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -16,11 +17,15 @@ public class Event {
     String eventName;
     EventCategory eventCategory;
     String createdBy;
+    LocalDateTime createdAt;
+    LocalDateTime updatedOn;
 
     public Event(String eventName, EventCategory eventCategory, String createdBy){
         this.eventId = UUID.randomUUID();
         this.eventName = eventName;
         this.eventCategory = eventCategory;
         this.createdBy = createdBy;
+        this.createdAt = LocalDateTime.now();
+        this.updatedOn = null;
     }
 }

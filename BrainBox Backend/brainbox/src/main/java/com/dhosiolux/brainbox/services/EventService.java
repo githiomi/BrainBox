@@ -7,6 +7,7 @@ import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.User;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -68,11 +69,15 @@ public class EventService implements EventInterface {
         Event eventToUpdate = this.events.stream().filter(_event -> _event.getEventId().equals(event.getEventId())).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("No event with the id: " + event.getEventId() + " was found on the database.", NOT_FOUND));
 
+        // Get event index
+        int index = this.events.indexOf(eventToUpdate);
+
         // Remove event from list
         this.events.remove(eventToUpdate);
 
         // Add event back to list
-        this.events.add(this.events.indexOf(eventToUpdate), event);
+        event.setUpdatedOn(LocalDateTime.now());
+        this.events.add(index, event);
         return event;
     }
 
