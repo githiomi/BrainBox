@@ -13,13 +13,15 @@ public class User {
     private String firstName;
     private String lastName;
     private String username;
+    private int age;
     private Gender gender;
     private String emailAddress;
     private Role userRole;
 
-    public User(String firstName, String lastName, Gender gender, String emailAddress, Role role){
+    public User(String firstName, String lastName, int age, Gender gender, String emailAddress, Role role){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.age = age;
         this.gender = gender;
         this.emailAddress = emailAddress;
         this.userRole = role;
