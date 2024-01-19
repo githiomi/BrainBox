@@ -1,4 +1,4 @@
-package com.dhosiolux.brainbox.enums;
+package com.dhosiolux.brainbox.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

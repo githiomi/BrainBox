@@ -1,6 +1,5 @@
 package com.dhosiolux.brainbox.models;
 
-import com.dhosiolux.brainbox.enums.Address;
 import com.dhosiolux.brainbox.enums.Gender;
 import com.dhosiolux.brainbox.enums.Role;
 import lombok.Data;

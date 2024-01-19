@@ -1,19 +1,17 @@
 package com.dhosiolux.brainbox.services;
 
-import com.dhosiolux.brainbox.enums.Address;
+import com.dhosiolux.brainbox.models.Address;
 import com.dhosiolux.brainbox.enums.Gender;
 import com.dhosiolux.brainbox.enums.Role;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.exceptions.UserAlreadyExistsException;
 import com.dhosiolux.brainbox.interfaces.UserInterface;
 import com.dhosiolux.brainbox.models.User;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.dhosiolux.brainbox.enums.Gender.FEMALE;
 import static com.dhosiolux.brainbox.enums.Gender.MALE;
 import static com.dhosiolux.brainbox.enums.Role.ADMIN;
 import static com.dhosiolux.brainbox.enums.Role.ALUMNI;

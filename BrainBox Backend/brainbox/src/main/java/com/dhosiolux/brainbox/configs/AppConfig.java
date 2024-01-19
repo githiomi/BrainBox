@@ -1,4 +1,4 @@
-package com.dhosiolux.brainbox;
+package com.dhosiolux.brainbox.configs;
 
 import com.dhosiolux.brainbox.controllers.EventController;
 import com.dhosiolux.brainbox.enums.EventCategory;
