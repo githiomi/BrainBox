@@ -59,6 +59,10 @@ html {
     color: var(--main-text-color);
 }
 
+body {
+    min-height: 100vh;
+}
+
 .divider {
     width: 1px;
     background: var(--red-to-pink-to-purple-vertical-gradient);

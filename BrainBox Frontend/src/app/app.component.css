@@ -1,0 +1,26 @@
+header{
+    height: 70px;
+    background-color: bisque;
+}
+
+#body{    
+    min-height: calc(100vh - 70px);
+    display: grid;
+    place-items: center;
+}
+
+#body img {
+    max-width: 100%;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate3d(0, 1, 0, 0);
+    }
+
+    to {
+        transform: rotate3d(0, 1, 0, 360deg);
+    }
+    
+}
