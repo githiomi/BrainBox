@@ -68,3 +68,5 @@ body {
     background: var(--red-to-pink-to-purple-vertical-gradient);
     margin-inline: 0.5rem;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
