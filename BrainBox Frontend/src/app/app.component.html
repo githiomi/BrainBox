@@ -1,17 +1,7 @@
-@if (title == "brainbox") {
-<div class="text-green-500">
-  <span> App title is {{ title }} </span>
-</div>
+<header id="header" #header>
+  <app-header />
+</header>
 
-@for (_event of (events$ | async); track _event.id) {
-  <div>
-    Event name: {{ _event.eventName }}
-  </div>
-}
-
-}
-@else {
-<div class="text-red-600">
-  <span>App title is in fact {{title}}</span>
+<div id="body">
+    <img [src]="logoUrl" alt="Logo URL">
 </div>
-}
