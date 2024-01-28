@@ -28,8 +28,9 @@
     --pill-accent: var(--bright-blue);
 
     /* Theme Variants */
-    --primary-background-color : #fff;
-    --secondary-background-color : #aaa;
+    --primary-background-color: #fff;
+    --secondary-background-color: #aaa;
+    --primary-accent-color: #FEC601;
     --main-text-color: black;
 
     font-family: system-ui, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -40,9 +41,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.dark-mode{
+.dark-mode {
     --primary-background-color: #000;
-    --secondary-background-color:  #222;
+    --secondary-background-color: #222;
     --main-text-color: white;
 }
 
@@ -68,5 +69,13 @@ body {
     background: var(--red-to-pink-to-purple-vertical-gradient);
     margin-inline: 0.5rem;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

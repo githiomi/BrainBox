@@ -1,10 +1,9 @@
 header{
-    height: 70px;
-    background-color: bisque;
+    height: 80px;
 }
 
 #body{    
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 80px);
     display: grid;
     place-items: center;
 }
