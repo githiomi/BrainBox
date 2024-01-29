@@ -22,8 +22,6 @@ export class HeaderComponent {
   
   changeTheme(): void {
     this._themeService.changeTheme();
-    console.log(this.isDarkMode);
-    
   }
 
 }
