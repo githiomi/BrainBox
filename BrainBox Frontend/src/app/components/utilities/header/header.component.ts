@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, EventEmitter, Output, WritableSignal, signal } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
@@ -13,11 +13,16 @@ export class HeaderComponent {
 
   readonly logoUrl : string = './../../../../assets/images/logo.png';
 
+  // Class variables
+  @Output() 
+  themeOutputEmitter : EventEmitter<boolean> = new EventEmitter();
+
   // States
   isDarkMode : WritableSignal<boolean> = signal(false);
 
   changeTheme() : void {
     this.isDarkMode.set(!this.isDarkMode());
+    this.themeOutputEmitter.emit(this.isDarkMode());
   }
 
 }
