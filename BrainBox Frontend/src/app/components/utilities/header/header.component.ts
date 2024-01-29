@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, WritableSignal, signal } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
+import { Component, EventEmitter, Output, WritableSignal, inject, signal } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -11,18 +12,20 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class HeaderComponent {
 
-  readonly logoUrl : string = './../../../../assets/images/logo.png';
+  readonly logoUrl: string = './../../../../assets/images/logo.png';
 
-  // Class variables
-  @Output() 
-  themeOutputEmitter : EventEmitter<boolean> = new EventEmitter();
+  // Dependency Injection
+  private _themeService: ThemeService = inject(ThemeService);
 
   // States
-  isDarkMode : WritableSignal<boolean> = signal(false);
+  isDarkMode: boolean;
 
-  changeTheme() : void {
-    this.isDarkMode.set(!this.isDarkMode());
-    this.themeOutputEmitter.emit(this.isDarkMode());
+  constructor() {
+    this.isDarkMode = this._themeService.getThemeState();
+  }
+
+  changeTheme(): void {
+    this._themeService.changeTheme();
   }
 
 }
