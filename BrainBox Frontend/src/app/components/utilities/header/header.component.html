@@ -14,10 +14,11 @@
         </ul>
     </nav>
 
-    <div class="actions">
+    <div class="actions flex gap-4">
         <!-- Theme Switchers -->
-        <mat-icon>brightness_2</mat-icon>
-        <mat-icon>brightness_5</mat-icon>
+        <mat-icon [ngClass]="isDarkMode() ? 'hide' : 'show'" (click)="changeTheme()">brightness_2</mat-icon>
+        <mat-icon [ngClass]="isDarkMode() ? 'show' : 'hide'" (click)="changeTheme()">brightness_5</mat-icon>
+        <mat-icon>view_headline</mat-icon>
     </div>
 
 </div>

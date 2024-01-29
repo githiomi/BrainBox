@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, WritableSignal, signal } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
@@ -12,5 +12,12 @@ import {MatIconModule} from '@angular/material/icon';
 export class HeaderComponent {
 
   readonly logoUrl : string = './../../../../assets/images/logo.png';
+
+  // States
+  isDarkMode : WritableSignal<boolean> = signal(false);
+
+  changeTheme() : void {
+    this.isDarkMode.set(!this.isDarkMode());
+  }
 
 }
