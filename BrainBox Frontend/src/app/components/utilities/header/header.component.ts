@@ -18,14 +18,12 @@ export class HeaderComponent {
   private _themeService: ThemeService = inject(ThemeService);
 
   // States
-  isDarkMode: boolean;
-
-  constructor() {
-    this.isDarkMode = this._themeService.getThemeState();
-  }
-
+  isDarkMode: WritableSignal<boolean> = this._themeService.isDarkMode;
+  
   changeTheme(): void {
     this._themeService.changeTheme();
+    console.log(this.isDarkMode);
+    
   }
 
 }

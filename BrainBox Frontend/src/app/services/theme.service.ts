@@ -6,7 +6,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 export class ThemeService {
 
   // Signal States
-  private isDarkMode : WritableSignal<boolean> = signal(false);
+  isDarkMode: WritableSignal<boolean> = signal(false);
 
   // Method to get current theme state
   getThemeState(): boolean {
@@ -14,7 +14,10 @@ export class ThemeService {
   }
 
   // Method to change theme
-  changeTheme() : void {
-    this.isDarkMode.set(!this.isDarkMode())
+  changeTheme(): void {
+    if (this.isDarkMode())
+      this.isDarkMode.set(false)
+    else
+      this.isDarkMode.set(true)
   }
 }
