@@ -1,15 +1,13 @@
 package com.dhosiolux.brainbox.controllers;
 
 import com.dhosiolux.brainbox.models.ResourceResponse;
-import com.dhosiolux.brainbox.models.User;
+import com.dhosiolux.brainbox.models.UserEntity;
 import com.dhosiolux.brainbox.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -26,33 +24,33 @@ public class UserController {
     }
 
     @GetMapping("")
-    private ResponseEntity<ResourceResponse<List<User>>> getAllUsers() {
-        return ResponseEntity.status(200).body(new ResourceResponse<List<User>>(this.userService.getAllUsers().size() + " users were found.", this.userService.getAllUsers(), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<List<UserEntity>>> getAllUsers() {
+        return ResponseEntity.status(200).body(new ResourceResponse<List<UserEntity>>(this.userService.getAllUsers().size() + " users were found.", this.userService.getAllUsers(), LocalDateTime.now()));
     }
 
     @GetMapping("/admins")
-    private ResponseEntity<ResourceResponse<List<User>>> getAdminUsers() {
-        return ResponseEntity.status(200).body(new ResourceResponse<List<User>>(this.userService.getAllAdmins().size() + " admin users were found.", this.userService.getAllAdmins(), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<List<UserEntity>>> getAdminUsers() {
+        return ResponseEntity.status(200).body(new ResourceResponse<List<UserEntity>>(this.userService.getAllAdmins().size() + " admin users were found.", this.userService.getAllAdmins(), LocalDateTime.now()));
     }
 
     @GetMapping("/alumni")
-    private ResponseEntity<ResourceResponse<List<User>>> getAlumniUsers() {
-        return ResponseEntity.status(200).body(new ResourceResponse<List<User>>(this.userService.getAllAlumni().size() + " alumni users were found.", this.userService.getAllAlumni(), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<List<UserEntity>>> getAlumniUsers() {
+        return ResponseEntity.status(200).body(new ResourceResponse<List<UserEntity>>(this.userService.getAllAlumni().size() + " alumni users were found.", this.userService.getAllAlumni(), LocalDateTime.now()));
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<ResourceResponse<User>> getUserById(@PathVariable("id") UUID userId){
-        return ResponseEntity.status(200).body(new ResourceResponse<User>("User with ID: " + userId + " was found on the database", this.userService.getUserById(userId), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<UserEntity>> getUserById(@PathVariable("id") UUID userId){
+        return ResponseEntity.status(200).body(new ResourceResponse<UserEntity>("User with ID: " + userId + " was found on the database", this.userService.getUserById(userId), LocalDateTime.now()));
     }
 
     @PostMapping("")
-    private ResponseEntity<ResourceResponse<User>> createNewUser(@RequestBody User user) {
-        return ResponseEntity.status(CREATED).body(new ResourceResponse<User>("A new user has been created.", this.userService.createNewUser(user), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<UserEntity>> createNewUser(@RequestBody UserEntity userEntity) {
+        return ResponseEntity.status(CREATED).body(new ResourceResponse<UserEntity>("A new user has been created.", this.userService.createNewUser(userEntity), LocalDateTime.now()));
     }
 
     @PutMapping("/update")
-    private ResponseEntity<ResourceResponse<Boolean>> updateExistingUser(@RequestBody User user){
-        return ResponseEntity.status(OK).body(new ResourceResponse<Boolean>("The user with id: " + user.getUserId() + " has been updated successfully", this.userService.updateExistingUser(user), LocalDateTime.now()));
+    private ResponseEntity<ResourceResponse<Boolean>> updateExistingUser(@RequestBody UserEntity userEntity){
+        return ResponseEntity.status(OK).body(new ResourceResponse<Boolean>("The user with id: " + userEntity.getUserId() + " has been updated successfully", this.userService.updateExistingUser(userEntity), LocalDateTime.now()));
     }
 
     @DeleteMapping("/delete/{id}")

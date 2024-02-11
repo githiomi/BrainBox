@@ -4,7 +4,7 @@ import com.dhosiolux.brainbox.enums.EventCategory;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
-import com.dhosiolux.brainbox.models.User;
+import com.dhosiolux.brainbox.models.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -55,7 +55,7 @@ public class EventService implements EventInterface {
     @Override
     public List<Event> getEventsByUsername(String username) {
         // Safe first - ensure user exists
-        User user = this.userService.getUserByUsername(username);
+        UserEntity userEntity = this.userService.getUserByUsername(username);
 
         return this.events.stream().filter(_event -> _event.getCreatedBy().equals(username)).collect(Collectors.toList());
     }

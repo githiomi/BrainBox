@@ -2,16 +2,13 @@ package com.dhosiolux.brainbox.controllers;
 
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.ResourceResponse;
-import com.dhosiolux.brainbox.models.User;
 import com.dhosiolux.brainbox.services.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.OK;

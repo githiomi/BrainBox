@@ -1,26 +1,25 @@
 package com.dhosiolux.brainbox.interfaces;
 
-import com.dhosiolux.brainbox.models.User;
+import com.dhosiolux.brainbox.models.UserEntity;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public interface UserInterface {
 
-    List<User> getAllUsers();
+    List<UserEntity> getAllUsers();
 
-    List<User> getAllAdmins();
+    List<UserEntity> getAllAdmins();
 
-    List<User> getAllAlumni();
+    List<UserEntity> getAllAlumni();
 
-    User getUserById(UUID userId);
+    UserEntity getUserById(UUID userId);
 
-    User getUserByUsername(String username);
+    UserEntity getUserByUsername(String username);
 
-    User createNewUser(User user);
+    UserEntity createNewUser(UserEntity userEntity);
 
-    boolean updateExistingUser(User user);
+    boolean updateExistingUser(UserEntity userEntity);
 
     boolean deleteExistingUser(UUID userId);
 

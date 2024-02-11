@@ -6,7 +6,7 @@ import com.dhosiolux.brainbox.enums.Role;
 import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.exceptions.UserAlreadyExistsException;
 import com.dhosiolux.brainbox.interfaces.UserInterface;
-import com.dhosiolux.brainbox.models.User;
+import com.dhosiolux.brainbox.models.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,82 +20,82 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class UserService implements UserInterface {
 
-    private List<User> users;
+    private List<UserEntity> userEntities;
 
     public void addTestUsers(){
-        this.users = new ArrayList<>(
+        this.userEntities = new ArrayList<>(
                 Arrays.asList(
-                        new User("Daniel", "Githiomi", new Random().nextInt((70-22) + 22), MALE, "d.githiomi@alustudent.com", ADMIN, new Address("Grand Baie", 30511L, "Mauritius")),
-                        new User("MacDonald", "Nyahoja", new Random().nextInt((70-22) + 22), MALE, "m.nyahoja@alustudent.com", ALUMNI, new Address("Quatre Bornes", 893264L, "Mauritius")),
-                        new User("Nabila", "Modan", new Random().nextInt((70-22) + 22), MALE, "n.modan@alustudent.com", ALUMNI, new Address("Maputo", 124567L, "Mozambique"))
+                        new UserEntity("Daniel", "Githiomi", new Random().nextInt((70-22) + 22), MALE, "d.githiomi@alustudent.com", ADMIN, new Address("Grand Baie", 30511L, "Mauritius")),
+                        new UserEntity("MacDonald", "Nyahoja", new Random().nextInt((70-22) + 22), MALE, "m.nyahoja@alustudent.com", ALUMNI, new Address("Quatre Bornes", 893264L, "Mauritius")),
+                        new UserEntity("Nabila", "Modan", new Random().nextInt((70-22) + 22), MALE, "n.modan@alustudent.com", ALUMNI, new Address("Maputo", 124567L, "Mozambique"))
                 )
         );
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return this.users.reversed();
+    public List<UserEntity> getAllUsers() {
+        return this.userEntities.reversed();
     }
 
     @Override
-    public List<User> getAllAdmins() {
-        return this.users.stream().filter(_user -> _user.getUserRole().equals(ADMIN)).collect(Collectors.toList());
+    public List<UserEntity> getAllAdmins() {
+        return this.userEntities.stream().filter(_user -> _user.getUserRole().equals(ADMIN)).collect(Collectors.toList());
     }
 
     @Override
-    public List<User> getAllAlumni() {
-        return this.users.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toList());
+    public List<UserEntity> getAllAlumni() {
+        return this.userEntities.stream().filter(_user -> _user.getUserRole().equals(ALUMNI)).collect(Collectors.toList());
     }
 
     @Override
-    public User getUserById(UUID userId){
-        return this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with ID: " + userId + " was found in the database.", NOT_FOUND));
+    public UserEntity getUserById(UUID userId){
+        return this.userEntities.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with ID: " + userId + " was found in the database.", NOT_FOUND));
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        return this.users.stream().filter(_user -> _user.getUsername().equals(username)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the username: " + username + " was found in the database.", NOT_FOUND));
+    public UserEntity getUserByUsername(String username) {
+        return this.userEntities.stream().filter(_user -> _user.getUsername().equals(username)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the username: " + username + " was found in the database.", NOT_FOUND));
     }
 
     @Override
-    public User createNewUser(User user) {
+    public UserEntity createNewUser(UserEntity userEntity) {
 
         // Check if user with email already exists
-        if(checkIfUserAlreadyExists(user))
-            throw new UserAlreadyExistsException("A user with the email " + user.getEmailAddress() + " already exists on the database.");
+        if(checkIfUserAlreadyExists(userEntity))
+            throw new UserAlreadyExistsException("A user with the email " + userEntity.getEmailAddress() + " already exists on the database.");
 
-        User newUser = new User(user.getFirstName(), user.getLastName(), user.getAge(), Enum.valueOf(Gender.class, user.getGender().toString()), user.getEmailAddress(), Enum.valueOf(Role.class, user.getUserRole().toString()), user.getAddress());
-        this.users.add(newUser);
+        UserEntity newUserEntity = new UserEntity(userEntity.getFirstName(), userEntity.getLastName(), userEntity.getAge(), Enum.valueOf(Gender.class, userEntity.getGender().toString()), userEntity.getEmailAddress(), Enum.valueOf(Role.class, userEntity.getUserRole().toString()), userEntity.getAddress());
+        this.userEntities.add(newUserEntity);
 
-        return newUser;
+        return newUserEntity;
     }
 
-    private boolean checkIfUserAlreadyExists(User user){
-        return this.users.stream().anyMatch(_user -> _user.getEmailAddress().equals(user.getEmailAddress()));
+    private boolean checkIfUserAlreadyExists(UserEntity userEntity){
+        return this.userEntities.stream().anyMatch(_user -> _user.getEmailAddress().equals(userEntity.getEmailAddress()));
     }
 
     @Override
-    public boolean updateExistingUser(User user){
-        if (this.getUserById(user.getUserId()) == null)
+    public boolean updateExistingUser(UserEntity userEntity){
+        if (this.getUserById(userEntity.getUserId()) == null)
             return false;
 
-        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(user.getUserId())).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + user.getUserId() + " was found in the database.", NOT_FOUND));
+        UserEntity userEntityToUpdate = this.userEntities.stream().filter(_user -> _user.getUserId().equals(userEntity.getUserId())).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + userEntity.getUserId() + " was found in the database.", NOT_FOUND));
 
         // Get current user index
-        int index = this.users.indexOf(userToUpdate);
+        int index = this.userEntities.indexOf(userEntityToUpdate);
 
         // Remove user from the list
-        this.users.remove(userToUpdate);
+        this.userEntities.remove(userEntityToUpdate);
 
-        this.users.add(index, user);
+        this.userEntities.add(index, userEntity);
 
         return true;
     }
 
     @Override
     public boolean deleteExistingUser(UUID userId) {
-        User userToUpdate = this.users.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + userId + " was found in the database.", NOT_FOUND));
-        this.users.remove(userToUpdate);
+        UserEntity userEntityToUpdate = this.userEntities.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with the ID: " + userId + " was found in the database.", NOT_FOUND));
+        this.userEntities.remove(userEntityToUpdate);
         return true;
     }
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Data
-public class User {
+public class UserEntity {
     private final UUID userId = UUID.randomUUID();
     private String firstName;
     private String lastName;
@@ -19,7 +19,7 @@ public class User {
     private Role userRole;
     private Address address;
 
-    public User(String firstName, String lastName, int age, Gender gender, String emailAddress, Role role, Address address){
+    public UserEntity(String firstName, String lastName, int age, Gender gender, String emailAddress, Role role, Address address){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -51,7 +51,7 @@ public class User {
     public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        return userId == ((User) o).getUserId();
+        return userId == ((UserEntity) o).getUserId();
     }
 
 }
