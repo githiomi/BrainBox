@@ -9,5 +9,4 @@ public class BrainboxApplication {
     public static void main(String[] args) {
         SpringApplication.run(BrainboxApplication.class, args);
     }
-
 }
