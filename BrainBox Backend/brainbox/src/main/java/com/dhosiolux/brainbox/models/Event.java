@@ -5,8 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -23,7 +27,7 @@ public class Event {
     String eventName;
     EventCategory eventCategory;
     String createdBy;
-    LocalDateTime createdAt;
+    LocalDate createdAt;
     LocalDateTime updatedOn;
 
     public Event(String eventName, EventCategory eventCategory, String createdBy){
@@ -31,7 +35,16 @@ public class Event {
         this.eventName = eventName;
         this.eventCategory = eventCategory;
         this.createdBy = createdBy;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = LocalDate.now();
+        this.updatedOn = null;
+    }
+
+    public Event(String eventName, EventCategory eventCategory, String createdBy, LocalDate date) {
+        this.eventId = UUID.randomUUID();
+        this.eventName = eventName;
+        this.eventCategory = eventCategory;
+        this.createdBy = createdBy;
+        this.createdAt = date;
         this.updatedOn = null;
     }
 }

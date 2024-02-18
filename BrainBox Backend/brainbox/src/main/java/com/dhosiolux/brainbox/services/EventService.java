@@ -5,10 +5,15 @@ import com.dhosiolux.brainbox.exceptions.ResourceNotFoundException;
 import com.dhosiolux.brainbox.interfaces.EventInterface;
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.UserEntity;
+import com.dhosiolux.brainbox.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -18,11 +23,13 @@ public class EventService implements EventInterface {
 
     // Service Dependency Injection
     private final UserService userService;
+    private final EventRepository eventRepository;
 
     private List<Event> events;
 
-    public EventService(UserService userService) {
+    public EventService(UserService userService, EventRepository eventRepository) {
         this.userService = userService;
+        this.eventRepository = eventRepository;
     }
 
     public void addTestEvents() {
@@ -32,6 +39,8 @@ public class EventService implements EventInterface {
                         new Event("Brain Cancer Awareness", EventCategory.HEALTH_AND_WELLNESS, "")
                 )
         );
+        Event demoEvent1 = new Event("Daniel Githiomi Event", EventCategory.PERSONAL_DEVELOPMENT, "Daniel Githiomi", LocalDate.of(2020, 5, 12));
+        this.eventRepository.save(demoEvent1);
     }
 
     @Override
