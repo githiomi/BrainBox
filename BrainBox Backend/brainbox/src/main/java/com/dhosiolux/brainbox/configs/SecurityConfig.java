@@ -29,7 +29,6 @@ public class SecurityConfig {
 
         // Ant Matchers
         // They have the following syntax: .antMatchers( HTTP METHOD, "<path/route endpoint>" ).permitAll() or .authenticated()
-
     }
 
     @Bean

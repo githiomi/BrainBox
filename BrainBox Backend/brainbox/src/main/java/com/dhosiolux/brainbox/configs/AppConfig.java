@@ -25,7 +25,6 @@ public class AppConfig {
             // Create dummy data
             userService.addTestUsers();
             eventService.addTestEvents();
-
         };
     }
 }
