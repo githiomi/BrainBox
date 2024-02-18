@@ -2,9 +2,8 @@ package com.dhosiolux.brainbox.interfaces;
 
 import com.dhosiolux.brainbox.models.Event;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 public interface EventInterface {
@@ -14,6 +13,8 @@ public interface EventInterface {
     Event getEventById(UUID eventId);
 
     List<Event> getEventsByUsername(String username);
+
+    List<Event> getEventsAfterGivenDate(LocalDate date);
 
     Event addNewEvent(Event event);
 

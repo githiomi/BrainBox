@@ -3,10 +3,12 @@ package com.dhosiolux.brainbox.controllers;
 import com.dhosiolux.brainbox.models.Event;
 import com.dhosiolux.brainbox.models.ResourceResponse;
 import com.dhosiolux.brainbox.services.EventService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -37,6 +39,12 @@ public class EventController {
     @GetMapping("/user")
     private ResponseEntity<ResourceResponse<List<Event>>> getEventsByUsername(@RequestParam(value = "username") String username){
         return ResponseEntity.status(OK).body(new ResourceResponse<List<Event>>(username + " has created the following events", this.eventService.getEventsByUsername(username), LocalDateTime.now()));
+    }
+
+    @GetMapping("/find/date/{date}")
+    private ResponseEntity<ResourceResponse<List<Event>>> getEventsCreatedAfterGivenDate(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        List<Event> eventsAfterGivenDate = this.eventService.getEventsAfterGivenDate(date);
+        return ResponseEntity.status(OK).body(new ResourceResponse<List<Event>>(eventsAfterGivenDate.isEmpty() ? "There are no events after: " + date : "These are the events created after: " + date, eventsAfterGivenDate, LocalDateTime.now()));
     }
 
     @PostMapping("/create")

@@ -54,6 +54,11 @@ public class EventService implements EventInterface {
     }
 
     @Override
+    public List<Event> getEventsAfterGivenDate(LocalDate date) {
+        return this.eventRepository.findEventByCreatedAtDateAfter(date);
+    }
+
+    @Override
     public Event addNewEvent(Event newEvent) {
         newEvent.setEventId(UUID.randomUUID());
         newEvent.setEventCategory(Enum.valueOf(EventCategory.class, newEvent.getEventCategory().toString()));
