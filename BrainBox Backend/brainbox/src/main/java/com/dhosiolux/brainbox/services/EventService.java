@@ -71,7 +71,7 @@ public class EventService implements EventInterface {
         // Safe first - ensure user exists
         UserEntity userEntity = this.userService.getUserByUsername(username);
 
-        return this.events.stream().filter(_event -> _event.getCreatedBy().equals(username)).collect(Collectors.toList());
+        return this.events.stream().filter(_event -> _event.getCreatedBy().equals(userEntity.getUsername())).collect(Collectors.toList());
     }
 
     @Override
