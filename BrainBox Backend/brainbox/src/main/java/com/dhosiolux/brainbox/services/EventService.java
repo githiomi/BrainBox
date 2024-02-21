@@ -40,7 +40,8 @@ public class EventService implements EventInterface {
                 )
         );
         Event demoEvent1 = new Event("Daniel Githiomi Event", EventCategory.PERSONAL_DEVELOPMENT, "Daniel Githiomi", LocalDate.of(2020, 5, 12));
-        this.eventRepository.save(demoEvent1);
+        Event demoEvent2 = new Event("Brain Cancer Awareness", EventCategory.CAMPUS_EVENT, "Dhosio Hoes", LocalDate.of(2022, 2, 2));
+        this.eventRepository.saveAll(Arrays.asList(demoEvent1, demoEvent2));
     }
 
     @Override

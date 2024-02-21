@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Configuration
 public class AppConfig {
@@ -26,5 +27,10 @@ public class AppConfig {
             userService.addTestUsers();
             eventService.addTestEvents();
         };
+    }
+
+    @Bean
+    Random randomGenerator() {
+        return new Random();
     }
 }
