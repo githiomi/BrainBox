@@ -1,5 +1,7 @@
 package com.dhosiolux.brainbox.enums;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Getter;
 
 @Getter
@@ -20,6 +22,7 @@ public enum EventCategory {
     PERSONAL_DEVELOPMENT("Personal Development");
 
     private final String categoryName;
+
     EventCategory(String categoryName) {
         this.categoryName = categoryName;
     }

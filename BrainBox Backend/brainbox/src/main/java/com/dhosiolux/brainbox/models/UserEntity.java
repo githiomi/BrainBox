@@ -13,13 +13,14 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String username;
+    private String password;
     private int age;
     private Gender gender;
     private String emailAddress;
     private Role userRole;
     private Address address;
 
-    public UserEntity(String firstName, String lastName, int age, Gender gender, String emailAddress, Role role, Address address){
+    public UserEntity(String firstName, String lastName, String password, int age, Gender gender, String emailAddress, Role role, Address address){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -28,6 +29,7 @@ public class UserEntity {
         this.userRole = role;
         this.address = address;
         this.username = generateUsername(firstName, lastName);
+        this.password = password;
     }
 
     private String generateUsername(String firstName, String lastName){
