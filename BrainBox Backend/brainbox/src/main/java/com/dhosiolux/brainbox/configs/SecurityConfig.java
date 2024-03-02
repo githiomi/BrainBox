@@ -2,9 +2,12 @@ package com.dhosiolux.brainbox.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +32,16 @@ public class SecurityConfig {
 
         // Ant Matchers
         // They have the following syntax: .antMatchers( HTTP METHOD, "<path/route endpoint>" ).permitAll() or .authenticated()
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        return new AuthenticationManager() {
+            @Override
+            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+                return null;
+            }
+        };
     }
 
     @Bean
