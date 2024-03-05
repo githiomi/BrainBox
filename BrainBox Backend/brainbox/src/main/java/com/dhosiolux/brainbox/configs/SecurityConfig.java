@@ -24,7 +24,7 @@ public class SecurityConfig {
 
         httpSecurity.csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1.0/events/**").permitAll()
+                        .requestMatchers("/api/v1.0/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
