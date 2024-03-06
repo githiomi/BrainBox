@@ -11,6 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,9 +25,12 @@ public class SecurityConfig {
 
         httpSecurity.csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1.0/**").permitAll()
+//                        .requestMatchers("/api/v1.0/**").permitAll()
+                        .requestMatchers("/api/v1.0/events/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                        .requestMatchers("/api/v1.0/users/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
+                .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
 
         return httpSecurity.build();
@@ -36,42 +40,22 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() {
-        return new AuthenticationManager() {
-            @Override
-            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                return null;
-            }
-        };
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder() {
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence rawPassword) {
-                return null;
-            }
-
-            @Override
-            public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return false;
-            }
-        };
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public UserDetailsService inMemoryUsers() {
+    public UserDetailsService userDetailsService() {
 
         UserDetails admin = User.builder()
-                .username("administrator")
-                .password("adminpass123")
+                .username("admin")
+                .password(passwordEncoder().encode("adminpass123"))
                 .roles("ADMIN")
                 .build();
 
         UserDetails daniel = User.builder()
                 .username("daniel")
-                .password("danielpass123")
+                .password(passwordEncoder().encode("danielpass123"))
                 .roles("USER")
                 .build();
 

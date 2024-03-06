@@ -15,7 +15,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class UserEntity {
 
     private final UUID userId = UUID.randomUUID();
