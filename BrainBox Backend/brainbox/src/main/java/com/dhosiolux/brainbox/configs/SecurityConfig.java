@@ -25,7 +25,6 @@ public class SecurityConfig {
 
         httpSecurity.csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/api/v1.0/**").permitAll()
                         .requestMatchers("/api/v1.0/events/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                         .requestMatchers("/api/v1.0/users/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()

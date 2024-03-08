@@ -46,7 +46,7 @@ public class EventService implements EventInterface {
 
     @Override
     public List<Event> getEvents() {
-        return events.reversed();
+        return this.eventRepository.findAll().reversed();
     }
 
     @Override
