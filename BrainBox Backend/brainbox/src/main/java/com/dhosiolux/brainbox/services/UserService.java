@@ -22,12 +22,12 @@ public class UserService implements UserInterface {
 
     private List<UserEntity> userEntities;
 
-    public void addTestUsers(){
+    public void addTestUsers() {
         this.userEntities = new ArrayList<>(
                 Arrays.asList(
-                        new UserEntity("Daniel", "Githiomi", UUID.randomUUID().toString(), new Random().nextInt((70-22) + 22), MALE, "d.githiomi@alustudent.com", ADMIN, new Address("Grand Baie", 30511L, "Mauritius")),
-                        new UserEntity("MacDonald", "Nyahoja", UUID.randomUUID().toString(), new Random().nextInt((70-22) + 22), MALE, "m.nyahoja@alustudent.com", ALUMNI, new Address("Quatre Bornes", 893264L, "Mauritius")),
-                        new UserEntity("Nabila", "Modan", UUID.randomUUID().toString(), new Random().nextInt((70-22) + 22), MALE, "n.modan@alustudent.com", ALUMNI, new Address("Maputo", 124567L, "Mozambique"))
+                        new UserEntity("Daniel", "Githiomi", UUID.randomUUID().toString(), new Random().nextInt((70 - 22) + 22), MALE, "d.githiomi@alustudent.com", ADMIN, new Address("Grand Baie", 30511L, "Mauritius")),
+                        new UserEntity("MacDonald", "Nyahoja", UUID.randomUUID().toString(), new Random().nextInt((70 - 22) + 22), MALE, "m.nyahoja@alustudent.com", ALUMNI, new Address("Quatre Bornes", 893264L, "Mauritius")),
+                        new UserEntity("Nabila", "Modan", UUID.randomUUID().toString(), new Random().nextInt((70 - 22) + 22), MALE, "n.modan@alustudent.com", ALUMNI, new Address("Maputo", 124567L, "Mozambique"))
                 )
         );
     }
@@ -48,7 +48,7 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public UserEntity getUserById(UUID userId){
+    public UserEntity getUserById(UUID userId) {
         return this.userEntities.stream().filter(_user -> _user.getUserId().equals(userId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("No user with ID: " + userId + " was found in the database.", NOT_FOUND));
     }
 
@@ -61,7 +61,7 @@ public class UserService implements UserInterface {
     public UserEntity createNewUser(UserEntity userEntity) {
 
         // Check if user with email already exists
-        if(checkIfUserAlreadyExists(userEntity))
+        if (checkIfUserAlreadyExists(userEntity))
             throw new UserAlreadyExistsException("A user with the email " + userEntity.getEmailAddress() + " already exists on the database.");
 
         UserEntity newUserEntity = new UserEntity(userEntity.getFirstName(), userEntity.getLastName(), UUID.randomUUID().toString(), userEntity.getAge(), Enum.valueOf(Gender.class, userEntity.getGender().toString()), userEntity.getEmailAddress(), Enum.valueOf(Role.class, userEntity.getUserRole().toString()), userEntity.getAddress());
@@ -70,12 +70,12 @@ public class UserService implements UserInterface {
         return newUserEntity;
     }
 
-    private boolean checkIfUserAlreadyExists(UserEntity userEntity){
+    private boolean checkIfUserAlreadyExists(UserEntity userEntity) {
         return this.userEntities.stream().anyMatch(_user -> _user.getEmailAddress().equals(userEntity.getEmailAddress()));
     }
 
     @Override
-    public boolean updateExistingUser(UserEntity userEntity){
+    public boolean updateExistingUser(UserEntity userEntity) {
         if (this.getUserById(userEntity.getUserId()) == null)
             return false;
 
